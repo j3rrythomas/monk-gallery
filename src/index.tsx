@@ -5,14 +5,14 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 
 import { BrowserRouter, Switch, Route } from "react-router-dom";
-import { UserAlbum } from "./pages";
+import { UserAlbums } from "./pages";
 
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
       <Switch>
         <Route exact path="/" component={App} />
-        <Route exact path="/user/:userId/albums" component={UserAlbum} />
+        <Route exact path="/user/:userId/albums" component={UserAlbums} />
       </Switch>
     </BrowserRouter>
   </React.StrictMode>,
