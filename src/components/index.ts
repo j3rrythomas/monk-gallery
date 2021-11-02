@@ -1,3 +1,4 @@
 import User from "./User";
+import UserAlbum from "./UserAlbum";
 
-export {User};
+export {User,UserAlbum};

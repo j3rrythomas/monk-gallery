@@ -1,3 +1,4 @@
-import UserAlbum from "./UserAlbum";
+import Users from "./Users";
+import UserAlbums from "./UserAlbums";
 
-export { UserAlbum };
+export { Users,UserAlbums };
