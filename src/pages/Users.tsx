@@ -58,13 +58,11 @@ const Users = () => {
       .get("https://jsonplaceholder.typicode.com/users")
       .then((response) => response.data)
       .then((usersData: UserType[]) => {
-        const albumRequests = usersData.map((user) => {
-          return axios
-            .get(`https://jsonplaceholder.typicode.com/users/${user.id}/albums`)
-            .then((response) => {
-              user.numAlbums = response.data.length;
-              return user;
-            });
+        const albumRequests = usersData.map(async (user) => {
+          const response = await axios
+            .get(`https://jsonplaceholder.typicode.com/users/${user.id}/albums`);
+          user.numAlbums = response.data.length;
+          return user;
         });
         Promise.all(albumRequests).then((data) => {
           setUsers(data);
