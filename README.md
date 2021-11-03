@@ -1,3 +1,8 @@
+##To run the project locally
+1.Clone the repo
+2.Run `yarn install` to install required packages
+3.Use `yarn start` to run the app in development node
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
