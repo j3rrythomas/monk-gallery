@@ -1,5 +1,5 @@
 ## To run the project locally
-#### 1. Clone the repo 
+#### 1. Clone the repo and run `cd monk-gallery` in the terminal to move to the repo directory
 #### 2. Run `yarn install` to install required packages 
 #### 3. Use `yarn start` to run the app in development node 
 
