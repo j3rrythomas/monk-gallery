@@ -1,7 +1,7 @@
-##To run the project locally
-1.Clone the repo
-2.Run `yarn install` to install required packages
-3.Use `yarn start` to run the app in development node
+## To run the project locally
+#### 1. Clone the repo 
+#### 2. Run `yarn install` to install required packages 
+#### 3. Use `yarn start` to run the app in development node 
 
 # Getting Started with Create React App
 
