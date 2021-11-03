@@ -3,26 +3,22 @@ import styled from "styled-components";
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-import { User } from "../components";
+import { Loading, User } from "../components";
 import { UserType } from "../types";
+import { DataContainerDiv, Title } from "../styles";
 
 const HomeDiv = styled.div``;
-const Headerdiv = styled.div`
+const HeaderDiv = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
 `;
-const Title = styled.h1`
-  margin: 2%;
-`;
+
 const SearchInput = styled.input`
   padding: 1%;
 `;
-export const UsersDiv = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-`;
+
 const SearchDiv = styled.div`
   display: flex;
   justify-content: center;
@@ -33,10 +29,13 @@ const SearchDiv = styled.div`
   }
 `;
 
+const UsersDiv = styled(DataContainerDiv)``;
+
 const Users = () => {
   const [users, setUsers] = useState<UserType[]>([]);
   const [searchValue, setSearchValue] = useState<string>("");
   const [matchingUsers, setMatchingUsers] = useState<UserType[]>([]);
+  const [loading, isLoading] = useState<Boolean>(true);
   const searchUsers: ChangeEventHandler<HTMLInputElement> = (event) => {
     event.preventDefault();
     setSearchValue(event.target.value);
@@ -70,6 +69,7 @@ const Users = () => {
         Promise.all(albumRequests).then((data) => {
           setUsers(data);
           setMatchingUsers(data);
+          isLoading(false);
         });
       })
       .catch((error) => {
@@ -82,7 +82,7 @@ const Users = () => {
   }, []);
   return (
     <HomeDiv>
-      <Headerdiv>
+      <HeaderDiv>
         <Title>Gallery</Title>
         <SearchDiv className="col-lg-6 col-md-12">
           <SearchInput
@@ -95,12 +95,16 @@ const Users = () => {
             Search
           </button>
         </SearchDiv>
-      </Headerdiv>
-      <UsersDiv>
-        {matchingUsers.map((user) => (
-          <User key={user.id} data={user} />
-        ))}
-      </UsersDiv>
+      </HeaderDiv>
+      {!loading ? (
+        <UsersDiv>
+          {matchingUsers.map((user) => (
+            <User key={user.id} data={user} />
+          ))}
+        </UsersDiv>
+      ) : (
+        <Loading />
+      )}
     </HomeDiv>
   );
 };

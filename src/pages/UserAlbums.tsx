@@ -5,21 +5,17 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 
 import { AlbumType } from "../types";
-import { UserAlbum } from "../components";
+import { UserAlbum, Loading } from "../components";
+import { Title, DataContainerDiv } from "../styles";
 
-const UserAlbumsDiv = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-`;
-const Title = styled.h1`
-  margin: 2%;
-`;
+const UserAlbumsDiv = styled(DataContainerDiv)``;
 
 const UserAlbums = () => {
   const [albums, setAlbums] = useState<AlbumType[]>([]);
+  const [loading, isLoading] = useState<Boolean>(true);
   const fetchAlbums = () => {
     axios
-      .get(`https://jsonplaceholder.typicode.com${pathId}`)
+      .get(`https://jsonplaceholder.typicode.com${pathname}`)
       .then((response) => response.data)
       .then((albumsData: AlbumType[]) => {
         const photosRequests = albumsData.map((album) => {
@@ -34,25 +30,29 @@ const UserAlbums = () => {
         });
         Promise.all(photosRequests).then((data) => {
           setAlbums(data);
+          isLoading(false);
         });
+      })
+      .catch((error) => {
+        console.error(error);
       });
   };
   useEffect(() => {
     fetchAlbums();
   }, []);
-  const { pathname: pathId } = useLocation();
+  const { pathname } = useLocation();
   return (
     <>
       <Title>Albums</Title>
-      {albums.map((album) => {
-        return (
-          <UserAlbumsDiv>
-            {albums.map((album) => (
-              <UserAlbum key={album.id} data={album} />
-            ))}
-          </UserAlbumsDiv>
-        );
-      })}
+      {!loading ? (
+        <UserAlbumsDiv>
+          {albums.map((album) => (
+            <UserAlbum key={album.id} data={album} />
+          ))}
+        </UserAlbumsDiv>
+      ) : (
+        <Loading />
+      )}
     </>
   );
 };

@@ -3,24 +3,35 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 
 import { UserType } from "../types";
+import {ContentDiv} from "../styles";
 
-export const UserDiv = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: start;
-  padding: 2%;
+const UserDiv = styled(ContentDiv)``;
+const Name = styled.h2`
+  font-size: 1.125rem;
+  font-weight: 600;
 `;
+const UserName = styled.h3`
+  font-size: 1rem;
+`;
+const NumAlbums = styled.p`
+  span {
+    font-size: 1.125rem;
+    font-weight: 600;
+  }
+`;
+const Email = styled(UserName)``;
 
 const User = ({ data }: { data: UserType }) => {
   return (
-    <UserDiv className="col-lg-3 col-md-6 col-sm-12">
-      <h2 style={{ fontSize: "1.125rem", fontWeight: 400 }}>
+    <UserDiv className="col-xl-3 col-lg-4 col-md-6 col-sm-12">
+      <Name>
         <Link to={`/user/${data.id}/albums`}>{data.name}</Link>
-      </h2>
-      <h3 style={{ fontSize: "1rem" }}>Username: {data.username}</h3>
-      <h3 style={{ fontSize: "1rem" }}>Email: {data.email}</h3>
-      <span>Number of Albums: {data.numAlbums}</span>
+      </Name>
+      <UserName>Username: {data.username}</UserName>
+      <Email>Email: {data.email}</Email>
+      <NumAlbums>
+        Number of Albums: <span>{data.numAlbums}</span>
+      </NumAlbums>
     </UserDiv>
   );
 };
