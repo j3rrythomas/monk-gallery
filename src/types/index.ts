@@ -12,3 +12,10 @@ export interface AlbumType {
   title: string;
   numPhotos: number;
 }
+
+export interface PhotoType {
+  albumId: number;
+  id: number;
+  title: string;
+  url: string;
+}

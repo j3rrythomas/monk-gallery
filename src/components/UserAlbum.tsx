@@ -3,21 +3,29 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 
 import { AlbumType } from "../types";
-import { UserDiv } from "./User";
+import { ContentDiv } from "../styles";
 
-const UserAlbumDiv = styled(UserDiv)``;
-
+const UserAlbumDiv = styled(ContentDiv)`
+  span {
+    font-size: 1.125rem;
+    font-weight: 600;
+  }
+`;
+const AlbumTitle = styled.h2`
+  font-size: 1.125rem;
+  font-weight: 400;
+`;
 const UserAlbum = ({ data }: { data: AlbumType }) => {
   return (
     <>
-      <UserAlbumDiv className="col-lg-3 col-md-6 col-sm-12">
-        <h2 style={{ fontSize: "1.125rem", fontWeight: 400 }}>
+      <UserAlbumDiv className="col-xl-3 col-lg-4 col-md-6 col-sm-12">
+        <AlbumTitle>
           Album Title:{"  "}
-          <Link to={`/user/${data.userId}/albums/${data.id}/photos`}>
-            {data.title}
-          </Link>
-        </h2>
-        <span>Number of Pictures: {data.numPhotos}</span>
+          <Link to={`/albums/${data.id}/photos`}>{data.title}</Link>
+        </AlbumTitle>
+        <p>
+          Number of Pictures: <span>{data.numPhotos}</span>
+        </p>
       </UserAlbumDiv>
     </>
   );
